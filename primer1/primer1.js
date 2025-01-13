@@ -1,27 +1,68 @@
 function temperatureConversion(temperature, fromScale, toScale){
+    isValidNumber(temperature);
 
-// TODO: Validate the input:
-//        - Check if the temperature is null, undefined, or a non-numeric string. If so, throw an error "Invalid temperature input".
-//        - Convert the temperature to a number.
-//        - Normalise fromScale and toScale to uppercase.
-//        - Check if fromScale and toScale are valid ( e.g. 'C', 'F'). If not, throw an error "Invalid conversion type or input scale".
-
-// TODO: Define helper functions for the conversions:
-//        - toFahrenheit(celsius): Converts Celsius to Fahrenheit.
-//        - toCelsius(fahrenheit): Converts Fahrenheit to Celsius.
-//        
-// TODO: Implement the conversion logic:
-//        - Use conditional logic to handle different toScale values (e.g. 'C', 'F').
-//        - Within each condition, handle conversions from different fromScale values (e.g. 'C', 'F') to the target toScale.
-//        - Use the helper functions to perform the actual conversions.
-
+    fromScale = fromScale.toUpperCase();
+    toScale = toScale.toUpperCase();
+    
+    if (toScale && fromScale === "C" || "F" || "K") {
+        if (fromScale === "F" && toScale === "C") {
+            return toCelsius(temperature, fromScale)
+        } else if (fromScale === "C" && toScale === "F") {
+            return toFahrenheit(temperature, fromScale);
+        } else if (fromScale === "C" && toScale === "K") {
+            return toKelvin(temperature, fromScale)
+        } else if (fromScale === "F" && toScale === "K") {
+            return toKelvin(temperature, fromScale)
+        } else if (fromScale === "K" && toScale === "F") {
+            return toFahrenheit(temperature, fromScale)
+        } else if (fromScale === "K" && toScale ==="C") {
+            return toCelsius(temperature, fromScale)
+        } else if (fromScale === toScale) {
+            return temperature
+        } else {
+            throw new Error("invalid conversion");
+        }
+    }
 
 }
 
+const isValidNumber = (number) => {
+    if (number === null | undefined | isNaN(Number(number))) {
+        throw new Error("not a valid number")
+    }
+    number = Number(number)
+}
+
+const toFahrenheit = (temperature, fromScale)  => {
+    isValidNumber(temperature);
+    if (fromScale === "K") {
+       return (temperature - 273.15) * (9 / 5) + 32
+    } else {
+    return (temperature * (9 / 5)) + 32 
+}
+}
+
+const toCelsius = (temperature, fromScale) => {
+    isValidNumber(temperature);
+    if (fromScale === "K") {
+        return temperature - 273.15
+    } else {
+    return (temperature - 32) / (9 / 5)
+    }
+}
+
+const toKelvin = (temperature, fromScale)  => {
+    isValidNumber(temperature);
+    if (fromScale === "C" || "F") {
+        if (fromScale === "C") {
+            return temperature + 273.15;
+        } else if (fromScale === "F") {
+            return (temperature - 32) * (5 / 9) + 273.15
+        } else {
+            throw new Error("not convertible");
+        }
+    }
+}
 
 
 export default temperatureConversion;
-
-
-
-
