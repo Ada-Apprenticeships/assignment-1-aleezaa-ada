@@ -1,11 +1,11 @@
 // Import the necessary modules
-import { createLinkedList, searchSocialMediaFeed } from './primer3.js'; // Adjust paths as needed
+import {createLinkedList, searchSocialMediaFeed}from "./primer3";
 
 describe('Social Media Feed Search', () => {
   describe('Linked List Creation', () => {
-    test('should create an empty linked list', () => {
-      const feed = createLinkedList([]);
-      expect(feed).toBeNull();
+    //updated test to not be able to create an empty linked list as this links to the posts. posts have a requirement of having at least one element.
+    test('should not be able to create an empty linked list', () => {
+      expect(() => {createLinkedList([])}).toThrow();
     });
 
     test('should create a linked list with single post', () => {
