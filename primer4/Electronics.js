@@ -5,21 +5,19 @@ class Electronics extends Product {
     #warranty;
 
     constructor(id, name, price, quantity, brand, warranty) {
-        super(id, name, price, quantity);
-        this.#brand = brand;
-        this.#warranty = warranty;
+      super(id, name, price, quantity);
+      this.#brand = brand;
+      this.#warranty = warranty;
     }
-
-
 
     getProductDetails() {
         return {
-            id: this.id,
-            name: this.name,
-            price: this.price,
-            quantity: this.quantity,
-            brand: this.#brand,
-            warranty: this.#warranty
+          id: this.id,
+          name: this.name,
+          price: this.price,
+          quantity: this.quantity,
+          brand: this.#brand,
+          warranty: this.#warranty
         };
     }
 }

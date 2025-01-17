@@ -3,32 +3,32 @@ function temperatureConversion(temperature, fromScale, toScale){
 
     fromScale = fromScale.toUpperCase();
     toScale = toScale.toUpperCase();
-    
-    if (toScale && fromScale === "C" || "F" || "K") {
-        if (fromScale === "F" && toScale === "C") {
-            return toCelsius(temperature, fromScale)
-        } else if (fromScale === "C" && toScale === "F") {
-            return toFahrenheit(temperature, fromScale);
-        } else if (fromScale === "C" && toScale === "K") {
-            return toKelvin(temperature, fromScale)
-        } else if (fromScale === "F" && toScale === "K") {
-            return toKelvin(temperature, fromScale)
-        } else if (fromScale === "K" && toScale === "F") {
-            return toFahrenheit(temperature, fromScale)
-        } else if (fromScale === "K" && toScale ==="C") {
-            return toCelsius(temperature, fromScale)
-        } else if (fromScale === toScale) {
-            return temperature
-        } else {
-            throw new Error("invalid conversion");
-        }
+
+    if (fromScale === toScale) {
+        return temperature; 
     }
 
+    switch (fromScale + " to " + toScale) {
+        case "C to F":
+            return toFahrenheit(temperature, fromScale);
+        case "C to K":
+            return toKelvin(temperature,fromScale)
+        case "F to C":
+            return toCelsius(temperature, fromScale)
+        case "F to K":
+            return toKelvin(temperature, fromScale)
+        case "K to C":
+            return toCelsius(temperature, fromScale)
+        case "K to F":
+            return toFahrenheit(temperature,fromScale);
+        default:
+            throw new Error("Unexpected conversion case");
+    }
 }
 
 const isValidNumber = (number) => {
     if (number === null | undefined | isNaN(Number(number))) {
-        throw new Error("not a valid number")
+        throw new Error("Not a valid number to convert")
     }
     number = Number(number)
 }
@@ -59,10 +59,9 @@ const toKelvin = (temperature, fromScale)  => {
         } else if (fromScale === "F") {
             return (temperature - 32) * (5 / 9) + 273.15
         } else {
-            throw new Error("not convertible");
+            throw new Error("Not valid conversion type");
         }
     }
 }
-
 
 export default temperatureConversion;

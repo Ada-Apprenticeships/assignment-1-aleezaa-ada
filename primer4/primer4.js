@@ -8,12 +8,13 @@ try {
   const laptop = ProductFactory.createProduct("Electronics", "B456", "Laptop", 799.99, 20, "Dell", "1 year");
   inventory.addProduct(tshirt);
   inventory.addProduct(laptop);
-  const retriedProduct = inventory.getProduct("A123")
-  console.log(retriedProduct); // T-shirt details
+  const retrievedProduct = inventory.getProduct("A123")
+  console.log(retrievedProduct); // T-shirt details
   console.log(inventory.getProduct("B456")); // Laptop details
 
   inventory.updateQuantity("A123", 150);
   console.log(inventory.getProduct("A123")); // Updated T-shirt quantity
+  console.log(inventory.getNumOfItems()); // Remaining items: 2
 
   inventory.removeProduct("B456");
   console.log(inventory.getNumOfItems()); // Remaining items: 1

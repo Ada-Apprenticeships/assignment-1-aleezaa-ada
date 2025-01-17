@@ -26,7 +26,7 @@ const stringFormatter = (hands) => {
     return hands.map(hand => hand.map(card => `${card.value} of ${card.suit}`));
 }
 
-const isValidInteger = (numPlayers, cardsPerPlayer, totalCards) => {
+const isValidNumber = (numPlayers, cardsPerPlayer, totalCards) => {
     if (numPlayers <= 0) {
         throw new Error("Number of players must be a positive integer.");
     }
@@ -41,7 +41,7 @@ const isValidInteger = (numPlayers, cardsPerPlayer, totalCards) => {
 const shuffleAndDeal = (numPlayers, cardsPerPlayer, numDecks = 1) => {
     const deck = createDeck(numDecks);
 
-    isValidInteger(numPlayers, cardsPerPlayer, deck.length);
+    isValidNumber(numPlayers, cardsPerPlayer, deck.length);
 
     shuffleDeck(deck);
 
