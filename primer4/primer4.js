@@ -1,18 +1,22 @@
-import Product from "./Product.js";
 import Inventory from "./Inventory.js";
+import ProductFactory from "./ProductFactory.js";
 
-// Sample usage
 const inventory = new Inventory();
-const product1 = new Product("A123", "T-shirt", 19.99, 100);
-const product2 = new Product("B456", "Jeans", 49.99, 50);
 
 try {
-  inventory.addProduct(product1);
-  inventory.addProduct(product2);
-  inventory.updateQuantity("A123", 50);
-  const retrievedProduct = inventory.getProduct("B456");
-  console.log(retrievedProduct);
-  inventory.removeProduct("A123");
+  const tshirt = ProductFactory.createProduct("Clothing", "A123", "T-shirt", 19.99, 100, "L", "Cotton");
+  const laptop = ProductFactory.createProduct("Electronics", "B456", "Laptop", 799.99, 20, "Dell", "1 year");
+  inventory.addProduct(tshirt);
+  inventory.addProduct(laptop);
+  const retriedProduct = inventory.getProduct("A123")
+  console.log(retriedProduct); // T-shirt details
+  console.log(inventory.getProduct("B456")); // Laptop details
+
+  inventory.updateQuantity("A123", 150);
+  console.log(inventory.getProduct("A123")); // Updated T-shirt quantity
+
+  inventory.removeProduct("B456");
+  console.log(inventory.getNumOfItems()); // Remaining items: 1
 } catch (error) {
-  console.error("An error occurred:", error.message);
+  console.error(error.message);
 }

@@ -1,3 +1,4 @@
+import Product from "./Product.js";
 class Inventory {
   #products;
 

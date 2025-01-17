@@ -1,6 +1,6 @@
 // Import the necessary modules
-import Product from './Product.js';
 import Inventory from './Inventory.js';
+import ProductFactory from './ProductFactory.js';
 
 describe('Inventory', () => {
   let inventory;
@@ -8,8 +8,8 @@ describe('Inventory', () => {
 
   beforeEach(() => {
     inventory = new Inventory();
-    product1 = new Product("A123", "T-shirt", 19.99, 100);
-    product2 = new Product("B456", "Jeans", 49.99, 50);
+    product1 = ProductFactory.createProduct("Clothing", "A123", "T-shirt", 19.99, 100, "L", "Cotton");
+    product2 = ProductFactory.createProduct("Electronics", "B456", "Laptop", 799.99, 20, "Dell", "1 year");
   });
 
   describe('Adding Products', () => {
@@ -43,7 +43,14 @@ describe('Inventory', () => {
       inventory.addProduct(product2);
       inventory.removeProduct("A123");
       expect(() => inventory.getProduct("A123")).toThrowError(`Product with ID A123 not found.`);
-      expect(inventory.getProduct("B456")).toEqual(product2.getProductDetails());
+      expect(inventory.getProduct("B456")).toEqual({
+        id: "B456",
+        name: "Laptop",
+        price: 799.99,
+        quantity: 20,
+        brand: "Dell",
+        warranty: "1 year"
+      });
     });
 
     test('throws error when removing a non-existent product', () => {
@@ -53,22 +60,27 @@ describe('Inventory', () => {
 
   describe('Retrieving Product Details', () => {
     test('can retrieve the details of products', () => {
-        inventory.addProduct(product1);
-        inventory.addProduct(product2);
-        
-        expect(inventory.getProduct("A123")).toEqual({
-            id: "A123",
-            name: "T-shirt",
-            price: 19.99,
-            quantity: 100
-        });
+      inventory.addProduct(product1);
+      inventory.addProduct(product2);
 
-        expect(inventory.getProduct("B456")).toEqual({
-            id: "B456",
-            name: "Jeans",
-            price: 49.99,
-            quantity: 50
-        });
+      expect(inventory.getProduct("A123")).toEqual({
+        id: "A123",
+        name: "T-shirt",
+        price: 19.99,
+        quantity: 100,
+        size: "L",
+        material: "Cotton"
+      });
+
+      expect(inventory.getProduct("B456")).toEqual({
+        id: "B456",
+        name: "Laptop",
+        price: 799.99,
+        quantity: 20,
+        brand: "Dell",
+        warranty: "1 year"
+      });
     });
   });
 });
+

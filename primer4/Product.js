@@ -30,13 +30,8 @@ class Product {
     }
   
     getProductDetails() {
-      return {
-        id: this.id,
-        name: this.name,
-        price: this.price,
-        quantity: this.quantity,
-      };
-    }
+      throw new Error("Method 'getProductDetails()' must be implemented.");
+  }
   }
 
   export default Product;
