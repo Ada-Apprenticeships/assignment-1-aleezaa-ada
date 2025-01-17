@@ -1,5 +1,6 @@
 // Import the necessary modules
 import Inventory from './Inventory.js';
+import Product from './Product.js';
 import ProductFactory from './ProductFactory.js';
 
 describe('Inventory', () => {
@@ -11,6 +12,16 @@ describe('Inventory', () => {
     product1 = ProductFactory.createProduct("Clothing", "A123", "T-shirt", 19.99, 100, "L", "Cotton");
     product2 = ProductFactory.createProduct("Electronics", "B456", "Laptop", 799.99, 20, "Dell", "1 year");
   });
+
+  describe('Abstract Product Class', () => {
+    test('cannot instantiate the Product class directly', () => {
+      const productInstance = new Product("P001", "AbstractProduct", 100, 10);
+      expect(() => productInstance.getProductDetails()).toThrowError(
+        "Method 'getProductDetails()' must be implemented."
+      );
+    });
+  });
+  
 
   describe('Adding Products', () => {
     test('can add products to the inventory', () => {
